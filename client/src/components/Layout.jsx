@@ -41,7 +41,7 @@ export default function Layout() {
             </div>
           </div>
           <button className="nav-link" onClick={handleLogout} style={{ marginTop: 8 }}>
-            <span className="nav-icon">🚪</span> Sign Out
+            <span className="nav-icon">🚪</span> Log Out
           </button>
         </div>
       </aside>
