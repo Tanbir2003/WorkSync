@@ -15,7 +15,7 @@ To test the application, you can log in with the following demo accounts:
 
 ### Admin Account (Project Manager)
 - **Email:** `test1@gmail.com` 
-- **Password:** `123456` *
+- **Password:** `123456` 
 
 ### Member Account (Team Member)
 - **Email:** `member1@gmail.com` 
