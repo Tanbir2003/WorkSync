@@ -13,13 +13,17 @@ const serviceAccountPath = resolve(__dirname, "serviceAccountKey.json");
 
 let serviceAccount;
 try {
-  serviceAccount = JSON.parse(readFileSync(serviceAccountPath, "utf8"));
+  if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+  } else {
+    serviceAccount = JSON.parse(readFileSync(serviceAccountPath, "utf8"));
+  }
 } catch (err) {
   console.error(
-    "❌ Could not find serviceAccountKey.json in the server/ directory."
+    "❌ Could not load Firebase credentials."
   );
   console.error(
-    "   Please download it from Firebase Console > Project Settings > Service Accounts."
+    "   Please provide FIREBASE_SERVICE_ACCOUNT env var or serviceAccountKey.json file."
   );
   process.exit(1);
 }
