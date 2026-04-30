@@ -6,7 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { createUserProfile } from "../services/api";
+import { createUserProfile, getUsers } from "../services/api";
 
 const AuthContext = createContext(null);
 
@@ -59,14 +59,9 @@ export function AuthProvider({ children }) {
           const idToken = await user.getIdToken();
           setToken(idToken);
           // Fetch user profile from our backend
-          const res = await fetch("http://localhost:5000/api/users", {
-            headers: { Authorization: `Bearer ${idToken}` },
-          });
-          if (res.ok) {
-            const users = await res.json();
-            const profile = users.find((u) => u.uid === user.uid);
-            setUserProfile(profile || null);
-          }
+          const users = await getUsers(idToken);
+          const profile = users.find((u) => u.uid === user.uid);
+          setUserProfile(profile || null);
         } catch (err) {
           console.error("Failed to load profile:", err);
         }
